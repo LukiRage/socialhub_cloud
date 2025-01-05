@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -13,12 +14,9 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: socialhub-frontend:latest
+        image: localhost:32000/socialhub-frontend:latest
         ports:
         - containerPort: 5500
-        env:
-        - name: NODE_ENV
-          value: production
 ---
 apiVersion: v1
 kind: Service
@@ -30,4 +28,4 @@ spec:
   ports:
   - port: 5500
     targetPort: 5500
-  type: LoadBalancer
+  type: NodePort

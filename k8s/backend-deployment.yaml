@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: backend
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -13,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: socialhub-backend:latest
+        image: localhost:32000/socialhub-backend:latest
         ports:
         - containerPort: 8080
         env:
@@ -29,8 +30,6 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: MYSQL_PASSWORD
-        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-          value: update
 ---
 apiVersion: v1
 kind: Service
