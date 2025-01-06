@@ -26,7 +26,7 @@ kubectl config set-context --current --namespace=socialhub
 kubectl apply -f k8s/mysql-secret.yaml
 kubectl apply -f k8s/mysql-pv-pvc.yaml
 kubectl apply -f k8s/mysql-deployment.yaml
-sleep 30  # Poczekaj na uruchomienie MySQL
+kubectl wait --for=condition=ready pod -l app=mysql  # Poczekaj na uruchomienie MySQL
 kubectl apply -f k8s/backend-deployment.yaml
 kubectl apply -f k8s/frontend-deployment.yaml
 
